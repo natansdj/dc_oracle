@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  oracle:
+    image: sath89/oracle-12c
+    container_name: dev_oracle
+    environment:
+      DBCA_TOTAL_MEMORY: 1024
+      VIRTUAL_HOST: "oracle.vm"
+      VIRTUAL_PORT: "8080"
+    volumes:
+      - /home/oracle12c/db:/u01/app/oracle
+      - storage:/storage
+    ports:
+      - "8088:8080"
+      - "1521:1521"
+    restart: always
+    mem_limit: 1500m
+    networks:
+      default:
+        ipv4_address: 172.18.0.8
+
+volumes:
+  storage:
+    driver: local
+    driver_opts:
+      device: /home/ip310/Documents/dc_oracle/backup
+      o: bind
+
+networks:
+  default:
+    external:
+      name: dev
