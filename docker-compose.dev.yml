@@ -24,6 +24,7 @@ volumes:
   storage:
     driver: local
     driver_opts:
+      type: bind
       device: /home/a407/Documents/dc_oracle/backup
       o: bind
   oracle12c:
